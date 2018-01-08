@@ -9,4 +9,12 @@ BALANCE_LIMIT = 90
     raise "Balance limit of #{BALANCE_LIMIT} reached" if amount +balance > BALANCE_LIMIT
     @balance += amount
   end
+<<<<<<< HEAD
+=======
+
+  def deduct(amount)
+    @balance -= amount
+  end
+
+>>>>>>> d4f03ea6f26d7a0444a84e1726fd12c47f00605f
 end
