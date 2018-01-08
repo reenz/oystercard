@@ -9,6 +9,4 @@ BALANCE_LIMIT = 90
     raise "Balance limit of #{BALANCE_LIMIT} reached" if amount +balance > BALANCE_LIMIT
     @balance += amount
   end
-
-
 end
