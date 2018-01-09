@@ -1,6 +1,7 @@
 class Oystercard
 attr_reader :balance
 attr_reader :entry_station
+attr_reader :exit_station
 attr_reader :journeys
 
 BALANCE_LIMIT = 90
@@ -10,6 +11,7 @@ MINIMUM_CHARGE = 1
   def initialize
    @balance = 0
    @entry_station = nil
+   @exit_station = nil
    @journeys = []
   end
 
@@ -21,6 +23,7 @@ MINIMUM_CHARGE = 1
 
   def in_journey?
   @entry_station == nil ? false : true
+  # @exit_station == nil ? true : false
   #!!entry_station
   end
 
@@ -29,14 +32,11 @@ MINIMUM_CHARGE = 1
     fail "Insufficient balance" if @balance < MINIMUM_BALANCE
   end
 
-  def touch_out(station)
-    @entry_station = station
-    @entry_station = nil
+  def touch_out(exit_station)
+    @exit_station = exit_station
     deduct(MINIMUM_CHARGE)
-  end
-
-  def trips
-    @journeys = [{entry_station.to_sym}]
+    @journeys << {entry_station: entry_station, exit_station: exit_station}
+    @entry_station = nil
   end
 
   private

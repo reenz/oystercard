@@ -39,23 +39,23 @@ let(:station) {double :station}
 end
 
   describe '#touch_out'do
-    let(:station) {double :station}
+    let(:exit_station) {double :station}
     it 'checks if oystercard is touched out'do
       #subject.touch_in
-      subject.touch_out(station)
+      subject.touch_out(exit_station)
       expect(subject).not_to be_in_journey
     end
 
     it "charges minimum fare" do
       subject.top_up(5)
-      expect{ subject.touch_out(station)}.to change{subject.balance}.by(-Oystercard::MINIMUM_CHARGE)
+      expect{ subject.touch_out(exit_station)}.to change{subject.balance}.by(-Oystercard::MINIMUM_CHARGE)
     end
 
     it 'stores nil when touched out'do
       subject.top_up(5)
-      subject.touch_out(station)
+      subject.touch_out(exit_station)
       expect(subject.entry_station).to eq nil
-      # expect{subject.touch_out(station)}.to change{subject.entry_station}.to nil
+      # expect{subject.touch_out(exit_station)}.to change{subject.entry_station}.to nil
     end
   end
 
@@ -70,5 +70,32 @@ end
       subject.top_up(5)
       expect{subject.touch_in(station)}.to change{subject.entry_station}.to station
     end
-end
-end
+  end
+
+    describe 'journeys' do
+      let(:entry_station) {double :station}
+      let(:exit_station) {double :station}
+
+      it "stores exit station"do
+      subject.top_up(5)
+      subject.touch_in(entry_station)
+      subject.touch_out(exit_station)
+      #p subject.exit_station
+      expect(subject.exit_station).to  eq exit_station
+      end
+
+      it 'checks if card has empty list of journeys by default'do
+        expect(subject.journeys).to eq []
+      end
+
+
+    let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
+
+      it 'stores a journey'do
+        subject.top_up(5)
+        subject.touch_in(entry_station)
+        subject.touch_out(exit_station)
+        expect(subject.journeys).to include journey
+      end
+    end
+  end
