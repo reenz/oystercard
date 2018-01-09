@@ -20,13 +20,13 @@ describe Oystercard do
     end
   end
 
-  describe '#deduct' do
-
-    it 'subtracts the fare from the balance' do
-      subject.top_up(5)
-      expect{ subject.deduct 1 }.to change{ subject.balance }.by -1
-    end
-  end
+  # describe '#deduct' do
+  #
+  #   it 'subtracts the fare from the balance' do
+  #     subject.top_up(5)
+  #     expect{ subject.deduct 1 }.to change{ subject.balance }.by -1
+  #   end
+  # end
 
   describe '#in_journey?' do
     before do
@@ -48,6 +48,11 @@ end
       #subject.touch_in
       subject.touch_out
       expect(subject).not_to be_in_journey
+    end
+
+    it "charges minimum fare" do
+      subject.top_up(5)
+      expect { subject.touch_out }.to change{subject.balance}.by(-1)
     end
   end
 
