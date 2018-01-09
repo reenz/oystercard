@@ -52,7 +52,7 @@ end
 
     it "charges minimum fare" do
       subject.top_up(5)
-      expect { subject.touch_out }.to change{subject.balance}.by(-1)
+      expect { subject.touch_out }.to change{subject.balance}.by(-Oystercard::MINIMUM_CHARGE)
     end
   end
 

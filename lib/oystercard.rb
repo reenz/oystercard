@@ -3,6 +3,7 @@ attr_reader :balance
 attr_accessor :in_journey
 BALANCE_LIMIT = 90
 MINIMUM_BALANCE = 1
+MINIMUM_CHARGE = 1
   def initialize
    @balance = 0
    @in_journey = false
@@ -24,7 +25,7 @@ MINIMUM_BALANCE = 1
   end
 
   def touch_out
-    @balance -= 1
+    deduct(MINIMUM_CHARGE)
     @in_journey = false
   end
 
@@ -33,5 +34,5 @@ MINIMUM_BALANCE = 1
   def deduct(amount)
     @balance -= amount
   end
-  
+
 end
