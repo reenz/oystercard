@@ -45,9 +45,15 @@ end
 
   describe '#touch_out'do
     it 'checks if oystercard is touched out'do
-      subject.touch_in
+      #subject.touch_in
       subject.touch_out
       expect(subject).not_to be_in_journey
     end
   end
+
+  describe '#touch_in' do
+    it 'raises error when touched in card has insufficient balance'do
+    expect{subject.touch_in}.to raise_error 'Insufficient balance'
+  end
+end
 end
