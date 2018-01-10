@@ -7,10 +7,10 @@ BALANCE_LIMIT = 90
 MINIMUM_BALANCE = 1
 MINIMUM_CHARGE = 1
 
-  def initialize
+  def initialize(journey = Journey.new)
    @balance = 0
    @journeys = []
-   @current_journey = Journey.new
+   @current_journey = journey
   end
 
   def top_up(amount)
@@ -20,6 +20,7 @@ MINIMUM_CHARGE = 1
 
   def touch_in(station)
     fail "Insufficient balance" if @balance < MINIMUM_BALANCE
+    @current_journey.start(station)
   end
 
   def touch_out(exit_station)
