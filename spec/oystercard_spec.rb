@@ -5,7 +5,7 @@ describe Oystercard do
   let(:entry_station) {double :station}
   let(:exit_station) {double :station}
 
-  let(:journey) {double :journey, :entry_station => entry_station, :exit_station => exit_station}
+  let(:journey) {double :journey}
   subject(:subject) {described_class.new(journey)}
 
   let(:station) {double :station}

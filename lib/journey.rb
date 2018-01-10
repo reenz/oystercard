@@ -30,10 +30,11 @@ class Journey
   #!!entry_station
   end
 
-  private
   def complete?
     (@entry_station.nil? || @exit_station.nil?) ? false : true
   end
+  private
+
 
 
 
