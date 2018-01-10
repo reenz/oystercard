@@ -40,4 +40,22 @@ describe Journey do
      expect(journey.exit_station).to eq exit_station
      end
    end
+
+   describe "#fare" do
+     it "return mnimum fare" do
+       journey.start(start_station)
+       journey.end(exit_station)
+     expect(journey.fare).to eq Journey::MINIMUM_CHARGE
+     end
+
+     it "return penalty fare, when you haven't touched in" do
+      journey.end(exit_station)
+     expect(journey.fare).to eq Journey::PENALTY_FARE
+     end
+
+     it "return penalty fare, when you haven't touched out" do
+    journey.start(start_station)
+     expect(journey.fare).to eq Journey::PENALTY_FARE
+     end
+   end
 end

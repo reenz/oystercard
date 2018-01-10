@@ -7,7 +7,7 @@ BALANCE_LIMIT = 90
 MINIMUM_BALANCE = 1
 MINIMUM_CHARGE = 1
 
-  def initialize(journey = Journey.new)
+  def initialize(journey = Journey)
    @balance = 0
    @journeys = []
    @current_journey = journey
@@ -24,7 +24,8 @@ MINIMUM_CHARGE = 1
   end
 
   def touch_out(exit_station)
-    deduct(MINIMUM_CHARGE)
+    @current_journey.end(exit_station)
+    deduct(@current_journey.fare)
     @journeys << @current_journey
   end
 

@@ -41,7 +41,9 @@ end
 
     it "charges minimum fare" do
       subject.top_up(5)
-      expect{ subject.touch_out(exit_station)}.to change{subject.balance}.by(-Oystercard::MINIMUM_CHARGE)
+      allow(journey).to receive(:end).with(exit_station)
+      allow(journey).to receive(:fare).and_return(5)
+      expect{ subject.touch_out(exit_station)}.to change{subject.balance}.by(-5)
     end
   end
 
@@ -63,7 +65,9 @@ end
       end
 
       it 'stores a journey'do
-        allow(journey).to receive(:start).with(entry_station) 
+        allow(journey).to receive(:start).with(entry_station)
+        allow(journey).to receive(:end).with(exit_station)
+        allow(journey).to receive(:fare).and_return(5)
         subject.top_up(5)
         subject.touch_in(entry_station)
         subject.touch_out(exit_station)
