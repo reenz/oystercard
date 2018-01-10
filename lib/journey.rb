@@ -24,16 +24,10 @@ class Journey
     @exit_station = exit_station
   end
 
-  def in_journey?
-  @entry_station.nil? ? false : true
-  # @exit_station == nil ? true : false
-  #!!entry_station
-  end
 
   def complete?
     (@entry_station.nil? || @exit_station.nil?) ? false : true
   end
-  private
 
 
 

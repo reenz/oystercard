@@ -10,7 +10,7 @@ MINIMUM_CHARGE = 1
   def initialize(journey = Journey)
    @balance = 0
    @journeys = []
-   @current_journey = journey
+   @journey = journey
   end
 
   def top_up(amount)
@@ -20,6 +20,7 @@ MINIMUM_CHARGE = 1
 
   def touch_in(station)
     fail "Insufficient balance" if @balance < MINIMUM_BALANCE
+    @current_journey = @journey.new
     @current_journey.start(station)
   end
 
@@ -27,6 +28,7 @@ MINIMUM_CHARGE = 1
     @current_journey.end(exit_station)
     deduct(@current_journey.fare)
     @journeys << @current_journey
+    @current_journey = nil
   end
 
   private

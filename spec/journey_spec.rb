@@ -3,8 +3,7 @@ require "journey"
 describe Journey do
    subject(:journey) {described_class.new}
    let(:start_station) {double("station")}
-  let(:exit_station) {double("station")}
-
+   let(:exit_station) {double("station")}
 
 
    it "should initialize entry_station to nil" do
@@ -15,16 +14,16 @@ describe Journey do
      expect(journey.exit_station).to be_nil
    end
 
-   describe "#in_journey?" do
-     it "should not be in journey" do
-     expect(journey).to_not be_in_journey
+   describe "#complete?" do
+     it "should initialise to not not be completed" do
+     expect(journey).to_not be_complete
      end
 
-     it "should be in journey when journey started"do
+     it "should be complete after entering and exiting" do
        journey.start(start_station)
-       expect(journey).to be_in_journey
+       journey.end(exit_station)
+       expect(journey).to be_complete
      end
-
    end
 
    describe "#start" do
