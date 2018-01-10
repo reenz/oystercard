@@ -76,14 +76,6 @@ end
       let(:entry_station) {double :station}
       let(:exit_station) {double :station}
 
-      it "stores exit station"do
-      subject.top_up(5)
-      subject.touch_in(entry_station)
-      subject.touch_out(exit_station)
-      #p subject.exit_station
-      expect(subject.exit_station).to  eq exit_station
-      end
-
       it 'checks if card has empty list of journeys by default'do
         expect(subject.journeys).to eq []
       end
