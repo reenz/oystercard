@@ -17,8 +17,14 @@ describe Journey do
 
    describe "#in_journey?" do
      it "should not be in journey" do
-     expect(journey.in_journey?).to be false
+     expect(journey).to_not be_in_journey
      end
+
+     it "should be in journey when journey started"do
+       journey.start(start_station)
+       expect(journey).to be_in_journey
+     end
+
    end
 
    describe "#start" do
